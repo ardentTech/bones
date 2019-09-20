@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    command: gunicorn src.main:app -b 0.0.0.0:8000 --pythonpath /code/src
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
