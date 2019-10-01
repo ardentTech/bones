@@ -1,10 +1,14 @@
+import logging
+
 from flask import Flask, jsonify, request
 
 from adapters.config import bus
 from adapters.views import TodoListView
 from app.messages import NewTodoCommand
+from domain.exceptions import ValidationError
 
 app = Flask(__name__)
+logger = logging.getLogger(__name__)
 
 
 @app.errorhandler(404)
@@ -24,6 +28,11 @@ def todos():
     if request.method == "GET":
         return jsonify(TodoListView()())
     else:
+        # @todo request level validation
         cmd = NewTodoCommand(**request.get_json())
-        bus.handle(cmd)
-        return "", 201
+        try:
+            bus.handle(cmd)
+        except ValidationError as e:
+            return jsonify(e.errors), 400
+        else:
+            return "", 201
