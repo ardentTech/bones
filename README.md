@@ -23,5 +23,5 @@ A simple application that demonstrates [Clean Architecture](https://blog.cleanco
 2. ~~Add view presenter~~
 3. Tests
 4. ~~Validation~~
-5. Docker hot-reloading
+5. ~~Server hot-reloading~~
 6. Request level validation
