@@ -6,5 +6,11 @@ services:
     command: gunicorn src.main:app -b 0.0.0.0:8000 --pythonpath /code/src --reload
     volumes:
       - .:/code
+    expose:
+      - 8000
+  nginx:
+    build: ./nginx
     ports:
-      - "8000:8000"
+      - 8080:80
+    depends_on:
+      - app

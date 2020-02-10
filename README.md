@@ -5,7 +5,7 @@ A simple application that demonstrates [Clean Architecture](https://blog.cleanco
 
 1. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/)
 2. `$ docker-compose up`
-3. Check app health http://127.0.0.1:8000/v1/health-check
+3. Check app health http://127.0.0.1:8080/v1/health-check
 
 ### Development
 
@@ -13,15 +13,13 @@ A simple application that demonstrates [Clean Architecture](https://blog.cleanco
 
 ### Testing
 
-### Warning
-
-1. Gunicorn is sitting on 0.0.0.0, but should be behind a reverse proxy (Nginx) in production.
-
 ### Todo
 
-1. Add Nginx
+1. ~~Add Nginx~~
 2. ~~Add view presenter~~
 3. Tests
 4. ~~Validation~~
 5. ~~Server hot-reloading~~
 6. Request level validation
+7. Dev and prod settings
+8. Integrate .env
