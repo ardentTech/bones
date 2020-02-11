@@ -11,5 +11,9 @@ class ITodoRepository(abc.ABC):
         pass
 
     @abc.abstractmethod
+    def get(self, uid: str) -> Todo:
+        pass
+
+    @abc.abstractmethod
     def get_all(self) -> List[Todo]:
         pass

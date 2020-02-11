@@ -26,7 +26,11 @@ class Entity(abc.ABC):
 
 class Todo(Entity):
 
-    VALIDATION_SCHEMA = {"title": {"minlength": 2, "type": "string"}}
+    VALIDATION_SCHEMA = {
+        "title": {"minlength": 2, "type": "string"},
+        "uid": {"type": "string"}
+    }
 
-    def __init__(self, title: str) -> None:
+    def __init__(self, title: str, uid: str) -> None:
         self.title = title
+        self.uid = uid

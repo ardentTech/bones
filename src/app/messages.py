@@ -14,6 +14,7 @@ class Message(abc.ABC):
 @dataclass(frozen=True)
 class NewTodoCommand(Message):
     title: str
+    uid: str
 
 
 class MessageBus(object):

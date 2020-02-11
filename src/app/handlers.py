@@ -17,5 +17,5 @@ class NewTodoHandler(object):
         self.repository = repository
 
     def __call__(self, cmd: Message) -> None:
-        validated_data = Todo.validate(title=cmd.title)
+        validated_data = Todo.validate(title=cmd.title, uid=cmd.uid)
         self.repository.add(Todo(**validated_data))
