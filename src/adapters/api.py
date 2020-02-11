@@ -2,8 +2,7 @@ import logging
 
 from flask import Flask, jsonify, request
 
-from adapters.config import bus
-from adapters.views import TodoListView
+from adapters.config import bus, todo_list_view
 from app.messages import NewTodoCommand
 from domain.exceptions import ValidationError
 
@@ -26,7 +25,7 @@ def health_check():
 @app.route("/v1/todos", methods=["GET", "POST"])
 def todos():
     if request.method == "GET":
-        return jsonify(TodoListView()())
+        return jsonify(todo_list_view())
     else:
         # @todo request level validation
         cmd = NewTodoCommand(**request.get_json())

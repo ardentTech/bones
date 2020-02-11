@@ -5,7 +5,8 @@ A simple application that demonstrates [Clean Architecture](https://blog.cleanco
 
 1. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/)
 2. `$ docker-compose up`
-3. Check app health http://127.0.0.1:8080/v1/health-check
+3. Check app health: `GET http://127.0.0.1:8080/v1/health-check`
+4. Create env file (and populate as necessary): `$ touch src/.env`
 
 ### Development
 
@@ -22,4 +23,4 @@ A simple application that demonstrates [Clean Architecture](https://blog.cleanco
 5. ~~Server hot-reloading~~
 6. Request level validation
 7. Dev and prod settings
-8. Integrate .env
+8. ~~Integrate .env~~

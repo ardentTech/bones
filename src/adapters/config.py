@@ -1,19 +1,20 @@
 import inject
 
-from adapters.repositories import TodoReadMemoryRepository, TodoWriteMemoryRepository
-from app.messages import MessageBus, NewTodoCommand
+from adapters.repositories import TodoMemoryRepository
+from adapters.views import TodoListView
 from app.handlers import NewTodoHandler
-from domain.ports import ITodoWriteRepository
+from app.messages import MessageBus, NewTodoCommand
+from app.ports import ITodoRepository
 
 
 def di_config(binder):
-    binder.bind(ITodoWriteRepository, TodoWriteMemoryRepository())
+    binder.bind(ITodoRepository, TodoMemoryRepository())
 
 
 inject.configure(di_config)
 
 bus = MessageBus()
 
-todo_read_repository = TodoReadMemoryRepository()
-
 bus.subscribe_to(NewTodoCommand, NewTodoHandler())
+
+todo_list_view = TodoListView()
