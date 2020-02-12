@@ -4,13 +4,13 @@ A simple application that demonstrates [Clean Architecture](https://blog.cleanco
 ### Setup
 
 1. Install [Docker](https://docs.docker.com/install/) and [Docker Compose](https://docs.docker.com/compose/install/)
-2. `$ docker-compose build app`
+2. `$ docker-compose up`
 3. Check app health: `GET http://127.0.0.1:8080/v1/health-check`
 4. Create env file (and populate as necessary): `$ touch src/.env`
 
 ### Development
 
-* Run project: `$ docker-compose up`
+* Rebuild dependencies: `$ docker-compose build app`
 
 ### Testing
 
