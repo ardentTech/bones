@@ -3,7 +3,7 @@ from uuid import uuid4
 
 from flask import Flask, jsonify, request
 
-from adapters.config import bus, todo_item_view, todo_list_view
+from adapters.config import bus, todo_view_factory
 from app.exceptions import TodoNotFoundError
 from app.messages import NewTodoCommand
 from domain.exceptions import ValidationError
@@ -27,7 +27,7 @@ def health_check():
 @app.route("/v1/todos/<todo_id>", methods=["GET"])
 def todo(todo_id):
     try:
-        return jsonify(todo_item_view(todo_id))
+        return jsonify(todo_view_factory(todo_id))
     except TodoNotFoundError as e:
         return not_found(e)
 
@@ -35,7 +35,7 @@ def todo(todo_id):
 @app.route("/v1/todos", methods=["GET", "POST"])
 def todos():
     if request.method == "GET":
-        return jsonify(todo_list_view())
+        return jsonify(todo_view_factory())
     else:
         # @todo request level validation
         cmd = NewTodoCommand(uid=str(uuid4()), **request.get_json())

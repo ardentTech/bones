@@ -1,24 +1,33 @@
 import inject
 
-from adapters.presenters import IPresenter, NoOpPresenter
 from app.ports import ITodoRepository
 
 
-class TodoView(object):
+class TodoItemView(object):
 
-    @inject.autoparams("repository")
-    def __init__(self, repository: ITodoRepository,  presenter: IPresenter = None):
-        self.presenter = NoOpPresenter() if presenter is None else presenter
+    def __init__(self, repository: ITodoRepository, todo_id: str):
         self.repository = repository
-
-
-class TodoItemView(TodoView):
-
-    def __call__(self, todo_id):
-        return self.presenter(self.repository.get(todo_id))
-
-
-class TodoListView(TodoView):
+        self.todo_id = todo_id
 
     def __call__(self):
-        return [self.presenter(t) for t in self.repository.get_all()]
+        return self.repository.get(self.todo_id)
+
+
+class TodoListView(object):
+
+    def __init__(self, repository: ITodoRepository):
+        self.repository = repository
+
+    def __call__(self):
+        return self.repository.get_all()
+
+
+class TodoViewFactory(object):
+
+    @inject.autoparams("repository")
+    def __init__(self, repository: ITodoRepository):
+        self.repository = repository
+
+    def __call__(self, todo_id: str = None):
+        view = TodoListView(self.repository) if todo_id is None else TodoItemView(self.repository, todo_id)
+        return view()
